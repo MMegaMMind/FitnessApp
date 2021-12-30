@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "fitness-app-af70a"
+  },
+  "targets": {
+    "fitness-app-af70a": {
+      "hosting": {
+        "FitnessApp": [
+          "fitness-app-af70a"
+        ]
+      }
+    }
+  }
+}

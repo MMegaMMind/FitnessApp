@@ -3,7 +3,18 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  firebase: {
+    apiKey: 'AIzaSyAhLwywmgFRmYYgP2REku4jDuQHPU2NfkY',
+    authDomain: 'fitness-app-af70a.firebaseapp.com',
+    databaseURL:
+      'https://fitness-app-af70a-default-rtdb.europe-west1.firebasedatabase.app',
+    projectId: 'fitness-app-af70a',
+    storageBucket: 'fitness-app-af70a.appspot.com',
+    messagingSenderId: '727376412882',
+    appId: '1:727376412882:web:d981e14a01916555bc2d0b',
+    measurementId: 'G-WTM4VHY164',
+  },
+  production: false,
 };
 
 /*
@@ -14,3 +25,13 @@ export const environment = {
  * on performance if an error is thrown.
  */
 // import 'zone.js/plugins/zone-error';  // Included with Angular CLI.
+// const firebaseConfig = {
+//   //   apiKey: "AIzaSyAhLwywmgFRmYYgP2REku4jDuQHPU2NfkY",
+//   //   authDomain: "fitness-app-af70a.firebaseapp.com",
+//   //   databaseURL: "https://fitness-app-af70a-default-rtdb.europe-west1.firebasedatabase.app",
+//   //   projectId: "fitness-app-af70a",
+//   //   storageBucket: "fitness-app-af70a.appspot.com",
+//   //   messagingSenderId: "727376412882",
+//   //   appId: "1:727376412882:web:d981e14a01916555bc2d0b",
+//   //   measurementId: "G-WTM4VHY164"
+//   // };
