@@ -3,6 +3,9 @@ import { BehaviorSubject } from 'rxjs'; // using from 'rxjs/BehaviorSubject' fai
 
 import { distinctUntilChanged } from 'rxjs/operators';
 
+import { User } from './auth/shared/services/auth/auth.service';
+import { pluck } from 'rxjs/operators';
+
 export interface State {
   user?: [];
   [key: string]: any;
@@ -22,9 +25,9 @@ export class Store {
     return this.subject.value;
   }
 
-  //   select<T>(name: string): Observable<T> {
-  //     return this.store.pipe(map(res));
-  //}
+  select<T>(name: string): Observable<T> {
+    return this.store.pipe(pluck(name));
+  }
 
   set(name: string, state: any) {
     this.subject.next({ ...this.value, [name]: state });

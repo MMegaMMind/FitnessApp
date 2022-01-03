@@ -21,7 +21,7 @@ export class RegisterComponent {
 
   async registerUser(event: FormGroup) {
     const { email, password } = event.value;
-    this.authService.createUser(email, password);
+    // this.authService.createUser(email, password);
 
     try {
       await this.authService.createUser(email, password);
