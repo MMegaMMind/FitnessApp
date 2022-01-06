@@ -5,7 +5,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { Store } from 'store';
 
 // feature modules
-import { AuthModule } from 'src/auth/auth.module';
+import { AuthModule } from '../auth/auth.module';
+import { HealthModule } from '../health/health.module';
 
 // containers
 import { AppComponent } from './containers/app/app.component';
@@ -26,6 +27,7 @@ export const ROUTES: Routes = [];
     BrowserModule,
     RouterModule.forRoot(ROUTES),
     AuthModule,
+    HealthModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideDatabase(() => getDatabase()),
     provideFirestore(() => getFirestore()),

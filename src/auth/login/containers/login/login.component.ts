@@ -22,7 +22,6 @@ export class LoginComponent {
 
   async loginUser(event: FormGroup) {
     const { email, password } = event.value;
-    this.authService.createUser(email, password);
 
     try {
       await this.authService.loginUser(email, password);

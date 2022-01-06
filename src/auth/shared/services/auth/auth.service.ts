@@ -17,6 +17,7 @@ export class AuthService {
     tap((next) => {
       if (!next) {
         this.store.set('user', null);
+        return;
       }
       const user: User = {
         email: next?.email,
