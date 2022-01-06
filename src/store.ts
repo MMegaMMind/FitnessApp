@@ -7,7 +7,7 @@ import { User } from './auth/shared/services/auth/auth.service';
 import { pluck } from 'rxjs/operators';
 
 export interface State {
-  user?: [];
+  user: User | undefined;
   [key: string]: any;
 }
 const state: State = {

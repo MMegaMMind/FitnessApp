@@ -15,6 +15,8 @@ import { provideDatabase, getDatabase } from '@angular/fire/database';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 
 // components
+import { AppHeaderComponent } from './components/app-header/app-header.component';
+import { AppNavComponent } from './components/app-nav/app-nav.component';
 
 // routes
 export const ROUTES: Routes = [];
@@ -28,7 +30,7 @@ export const ROUTES: Routes = [];
     provideDatabase(() => getDatabase()),
     provideFirestore(() => getFirestore()),
   ],
-  declarations: [AppComponent],
+  declarations: [AppComponent, AppHeaderComponent, AppNavComponent],
   providers: [Store],
   bootstrap: [AppComponent],
 })
