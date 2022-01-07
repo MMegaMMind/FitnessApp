@@ -4,6 +4,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Store } from 'store';
 
 import { tap } from 'rxjs/operators';
+import firebase from 'firebase/compat/app';
 
 export interface User {
   email?: string | null;
@@ -29,6 +30,15 @@ export class AuthService {
   );
 
   constructor(private af: AngularFireAuth, private store: Store) {}
+
+  get user() {
+    //.user
+    return firebase.auth().currentUser;
+  }
+
+  get authState() {
+    return this.af.authState;
+  }
 
   createUser(email: string, password: string) {
     return this.af.createUserWithEmailAndPassword(email, password);

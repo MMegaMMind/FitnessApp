@@ -5,13 +5,16 @@ import { distinctUntilChanged } from 'rxjs/operators';
 
 import { User } from './auth/shared/services/auth/auth.service';
 import { pluck } from 'rxjs/operators';
+import { Meal } from './health/shared/services/meals/meals.service';
 
 export interface State {
   user: User | undefined;
+  meals: Meal[] | undefined;
   [key: string]: any;
 }
 const state: State = {
   user: undefined,
+  meals: undefined,
 };
 
 export class Store {
