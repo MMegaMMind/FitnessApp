@@ -13,8 +13,8 @@ import { MealsService } from './services/meals/meals.service';
 
 @NgModule({
   imports: [CommonModule, RouterModule, AngularFireDatabaseModule],
-  declarations: [ListItemComponent],
-  exports: [ListItemComponent],
+  // declarations: [ListItemComponent],
+  // exports: [ListItemComponent],
 })
 export class SharedModule {
   static forRoot(): ModuleWithProviders<any> {
