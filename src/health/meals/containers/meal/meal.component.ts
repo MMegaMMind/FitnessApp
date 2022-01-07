@@ -1,5 +1,8 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { Observable, Subscription } from 'rxjs';
+
+import { switchMap } from 'rxjs/operators';
 
 import {
   Meal,
@@ -22,11 +25,30 @@ import {
     </div>
   </div> `,
 })
-export class MealComponent {
-  constructor(private mealsService: MealsService, private router: Router) {}
+export class MealComponent implements OnInit, OnDestroy {
+  meal$?: Observable<Meal> | Observable<any>;
+  subscription!: Subscription;
+
+  constructor(
+    private mealsService: MealsService,
+    private router: Router,
+    private activeRoute: ActivatedRoute
+  ) {}
+
+  ngOnInit() {
+    this.subscription = this.mealsService.meals$.subscribe();
+    this.meal$ = this.activeRoute.params.pipe(
+      switchMap((param) => {
+        return this.mealsService.getMeal(param.id);
+      })
+    );
+  }
+
+  ngOnDestroy() {}
 
   async addMeal(event: Meal) {
     await this.mealsService.addMeal(event);
+    console.log('event', event);
     //REDIRECT
     this.backToMeals();
   }
@@ -34,4 +56,6 @@ export class MealComponent {
   backToMeals() {
     this.router.navigate(['meals']);
   }
+}
+{
 }

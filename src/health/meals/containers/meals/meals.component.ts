@@ -28,4 +28,8 @@ export class MealsComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
+
+  removeMeal(event: Meal) {
+    this.mealsService.removeMeal(event);
+  }
 }

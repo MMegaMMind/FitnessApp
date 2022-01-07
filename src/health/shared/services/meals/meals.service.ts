@@ -5,6 +5,8 @@ import { Observable, tap } from 'rxjs';
 import { AuthService } from 'src/auth/shared/services/auth/auth.service';
 import { Store } from 'store';
 
+import { of } from 'rxjs';
+
 export interface Meal {
   name: string;
   ingredients: string[];
@@ -35,7 +37,17 @@ export class MealsService {
     return this.authService.user?.uid;
   }
 
-  addMeal(meal: Meal) {
+  getMeal(key: string) {
+    if (!key) return of({});
+  }
+
+  addMeal(meal: any) {
     return this.db.list(`meals/${this.uid}`).push(meal);
+  }
+
+  removeMeal(payload: any) {
+    //passed this way because we are using snapshotChanges()
+    //and as meal we return the payload that has the key inside and the other info
+    return this.db.list(`meals/${this.uid}`).remove(payload.key);
   }
 }

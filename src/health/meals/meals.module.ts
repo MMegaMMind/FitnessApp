@@ -16,6 +16,7 @@ import { ListItemComponent } from '../shared/components/list-item/list-item.comp
 export const ROUTES: Routes = [
   { path: '', component: MealsComponent },
   { path: 'new', component: MealComponent },
+  { path: ':id', component: MealComponent },
 ];
 
 @NgModule({
