@@ -11,12 +11,14 @@ import { Workout } from './health/shared/services/workouts/workouts.service';
 export interface State {
   user: User | undefined;
   meals: Meal[] | undefined;
+  date: Date | undefined;
   workouts: Workout[] | undefined;
   [key: string]: any;
 }
 const state: State = {
   user: undefined,
   meals: undefined,
+  date: undefined,
   workouts: undefined,
 };
 

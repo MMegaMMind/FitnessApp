@@ -8,6 +8,7 @@ import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 //SERVICES
 import { MealsService } from './services/meals/meals.service';
 import { WorkoutsService } from './services/workouts/workouts.service';
+import { ScheduleService } from './services/schedule/schedule.service';
 
 //components
 import { ListItemComponent } from './components/list-item/list-item.component';
@@ -25,7 +26,7 @@ export class SharedModule {
   static forRoot(): ModuleWithProviders<SharedModule> {
     return {
       ngModule: SharedModule,
-      providers: [MealsService, WorkoutsService],
+      providers: [MealsService, WorkoutsService, ScheduleService],
     };
   }
 }
