@@ -63,6 +63,8 @@ export class WorkoutsService {
   removeWorkout(payload: any) {
     //passed this way because we are using snapshotChanges()
     //and as meal we return the payload that has the key inside and the other info
-    return this.db.list(`workouts/${this.uid}`).remove(payload.key);
+    return this.db
+      .list(`workouts/${this.uid}`)
+      .remove(payload.key ? payload.key : payload);
   }
 }

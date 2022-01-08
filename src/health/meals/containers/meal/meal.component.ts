@@ -52,7 +52,9 @@ export class MealComponent implements OnInit, OnDestroy {
 
   async removeMeal(event: Meal) {
     const key = this.activeRoute.snapshot.params['id'];
+    console.log('Key', event);
     await this.mealsService.removeMeal(key);
+
     this.backToMeals();
   }
 

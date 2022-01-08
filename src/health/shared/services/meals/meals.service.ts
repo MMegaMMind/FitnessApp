@@ -55,8 +55,13 @@ export class MealsService {
   }
 
   removeMeal(payload: any) {
+    console.log('Payload', payload);
+    console.log(this.uid);
+
     //passed this way because we are using snapshotChanges()
     //and as meal we return the payload that has the key inside and the other info
-    return this.db.list(`meals/${this.uid}`).remove(payload.key);
+    return this.db
+      .list(`meals/${this.uid}`)
+      .remove(payload.key ? payload.key : payload);
   }
 }

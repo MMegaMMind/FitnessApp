@@ -10,7 +10,7 @@ import { Store } from 'store';
 @Component({
   selector: 'meals',
   styleUrls: ['meals.component.scss'],
-  providers: [MealsService],
+
   templateUrl: 'meals.component.html',
 })
 export class MealsComponent implements OnInit, OnDestroy {
@@ -22,7 +22,6 @@ export class MealsComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.meals$ = this.store.select<Meal[]>('meals');
     this.subscription = this.mealsService.meals$.subscribe();
-    console.log(this.meals$);
   }
 
   ngOnDestroy() {
