@@ -25,7 +25,6 @@ export class WorkoutsService {
     .snapshotChanges()
     .pipe(
       tap((next) => {
-        console.log('next', next);
         this.store.set('workouts', next);
       })
     );

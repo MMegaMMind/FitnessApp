@@ -1,0 +1,25 @@
+<div class="list-item">
+  <a [routerLink]="getRoute(item)">
+
+
+    <p class="list-item__name">{{ item.payload.val().name }}</p>
+
+    <p class="list-item__ingredients">
+      <span *ngIf="item.payload.val().ingredients; else showWorkout"> {{ item.payload.val().ingredients |join }}</span>
+    </p>
+
+    <ng-template #showWorkout>
+      <span>{{ item.payload.val()|workout}}</span>
+    </ng-template>
+  </a>
+
+  <div class="list-item__delete" *ngIf="toggled">
+    <p>Delete item?</p>
+    <button class="confirm" type="button" (click)="removeItem()">Yes</button>
+    <button class="cancel " type="button" (click)="toggle()">No</button>
+  </div>
+
+  <button class="trash" type="button" (click)="toggle()">
+    <img src="assets/img/remove.svg" alt="" />
+  </button>
+</div>

@@ -10,24 +10,7 @@ import {
   selector: 'list-item',
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['list-item.component.scss'],
-  template: ` <div class="list-item">
-    <a [routerLink]="getRoute(item)">
-      <p class="list-item__name">{{ item.payload.val().name }}</p>
-      <p class="list-ingredients">
-        <span> {{ item.payload.val().ingredients }}</span>
-      </p>
-    </a>
-
-    <div class="list-item__delete" *ngIf="toggled">
-      <p>Delete item?</p>
-      <button class="confirm" type="button" (click)="removeItem()">Yes</button>
-      <button class="cancel " type="button" (click)="toggle()">No</button>
-    </div>
-
-    <button class="trash" type="button" (click)="toggle()">
-      <img src="assets/img/remove.svg" alt="" />
-    </button>
-  </div>`,
+  templateUrl: 'list-item.component.html'
 })
 export class ListItemComponent {
   toggled = false;

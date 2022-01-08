@@ -9,12 +9,17 @@ import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { MealsService } from './services/meals/meals.service';
 import { WorkoutsService } from './services/workouts/workouts.service';
 
+//components
 import { ListItemComponent } from './components/list-item/list-item.component';
+
+//pipes
+import { JoinPipe } from './pipes/join.pipe';
+import { WorkoutPipe } from './pipes/workout.pipe';
 
 @NgModule({
   imports: [CommonModule, RouterModule, AngularFireDatabaseModule],
-  declarations: [ListItemComponent],
-  exports: [ListItemComponent],
+  declarations: [ListItemComponent, JoinPipe, WorkoutPipe],
+  exports: [ListItemComponent, JoinPipe, WorkoutPipe],
 })
 export class SharedModule {
   static forRoot(): ModuleWithProviders<SharedModule> {

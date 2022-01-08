@@ -8,6 +8,7 @@ import { SharedModule } from '../shared/shared.module';
 
 //components
 import { WorkoutFormComponent } from './components/workout-form/workout-form.component';
+import { WorkoutTypeComponent } from './components/workout-type/workout-type.component';
 
 //containers
 import { WorkoutsComponent } from './containers/workouts/workouts.component';
@@ -26,6 +27,11 @@ export const ROUTES: Routes = [
     RouterModule.forChild(ROUTES),
     SharedModule,
   ],
-  declarations: [WorkoutsComponent, WorkoutComponent, WorkoutFormComponent],
+  declarations: [
+    WorkoutsComponent,
+    WorkoutComponent,
+    WorkoutFormComponent,
+    WorkoutTypeComponent,
+  ],
 })
 export class WorkoutsModule {}

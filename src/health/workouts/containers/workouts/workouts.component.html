@@ -10,7 +10,7 @@
   <div *ngIf="workouts$ | async as workouts; else loading">
     <div class="message" *ngIf="!workouts.length">
       <img src="assets/img/face.svg" />
-      No meals, add a new Workout to start!
+      No workouts, add a new Workout to start!
     </div>
 
     <list-item *ngFor="let workout of workouts" [item]="workout" (remove)="removeWorkout($event)"></list-item>
