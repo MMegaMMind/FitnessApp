@@ -13,17 +13,7 @@ import {
   selector: 'meal',
   providers: [MealsService],
   styleUrls: ['meal.component.scss'],
-  template: `<div class="meal">
-    <div class="meal__title">
-      <h1>
-        <img src="assets/img/food.svg" />
-        <span>Create meal</span>
-      </h1>
-    </div>
-    <div>
-      <meal-form (create)="addMeal($event)"></meal-form>
-    </div>
-  </div> `,
+  templateUrl: 'meal.component.html',
 })
 export class MealComponent implements OnInit, OnDestroy {
   meal$?: Observable<Meal> | Observable<any>;
@@ -38,24 +28,35 @@ export class MealComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.subscription = this.mealsService.meals$.subscribe();
     this.meal$ = this.activeRoute.params.pipe(
-      switchMap((param) => {
-        return this.mealsService.getMeal(param.id);
+      switchMap((params) => {
+        return this.mealsService.getMeal(params['id']);
       })
     );
   }
 
-  ngOnDestroy() {}
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
 
   async addMeal(event: Meal) {
     await this.mealsService.addMeal(event);
-    console.log('event', event);
     //REDIRECT
+    this.backToMeals();
+  }
+
+  async updateMeal(event: Meal) {
+    const key = this.activeRoute.snapshot.params['id'];
+    await this.mealsService.updateMeal(key, event);
+    this.backToMeals();
+  }
+
+  async removeMeal(event: Meal) {
+    const key = this.activeRoute.snapshot.params['id'];
+    await this.mealsService.removeMeal(key);
     this.backToMeals();
   }
 
   backToMeals() {
     this.router.navigate(['meals']);
   }
-}
-{
 }

@@ -1,8 +1,11 @@
 import {
-  ChangeDetectionStrategy,
   Component,
+  ChangeDetectionStrategy,
+  OnChanges,
   Output,
   EventEmitter,
+  Input,
+  SimpleChanges,
 } from '@angular/core';
 
 import {
@@ -22,9 +25,21 @@ import { Meal } from 'src/health/shared/services/meals/meals.service';
   styleUrls: ['meal-form.component.scss'],
   templateUrl: 'meal-form.component.html',
 })
-export class MealFormComponent {
+export class MealFormComponent implements OnChanges {
+  toggled = false;
+  exists = false;
+
+  @Input()
+  meal!: Meal | any;
+
   @Output()
   create = new EventEmitter<Meal>();
+
+  @Output()
+  update = new EventEmitter<Meal>();
+
+  @Output()
+  remove = new EventEmitter<Meal>();
 
   form = this.fb.group({
     name: ['', Validators.required],
@@ -32,6 +47,28 @@ export class MealFormComponent {
   });
 
   constructor(private fb: FormBuilder) {}
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (this.meal && this.meal.payload) {
+      this.exists = true;
+      this.emptyIngredients();
+
+      const value = this.meal.payload.val();
+      this.form.patchValue(value);
+
+      if (value.ingredients) {
+        for (const item of value.ingredients) {
+          this.ingredients.push(new FormControl(item));
+        }
+      }
+    }
+  }
+
+  emptyIngredients() {
+    while (this.ingredients.controls.length) {
+      this.ingredients.removeAt(0);
+    }
+  }
 
   get required() {
     return (
@@ -56,5 +93,19 @@ export class MealFormComponent {
     if (this.form.valid) {
       this.create.emit(this.form.value);
     }
+  }
+
+  updateMeal() {
+    if (this.form.valid) {
+      this.update.emit(this.form.value);
+    }
+  }
+
+  removeMeal() {
+    this.remove.emit(this.form.value);
+  }
+
+  toggle() {
+    this.toggled = !this.toggled;
   }
 }

@@ -8,23 +8,25 @@ import { filter } from 'rxjs';
 
 import { of } from 'rxjs';
 
-export interface Meal {
+export interface Workout {
   name: string;
-  ingredients: string[];
+  type: string; //endurance | strength
+  strength: any;
+  endurance: any;
   timestamp: number;
   $key: string;
   $exists?: () => boolean;
 }
 
 @Injectable()
-export class MealsService {
-  meals$: Observable<Meal[]> | Observable<any[]> = this.db
-    .list(`meals/${this.uid}`)
+export class WorkoutsService {
+  workouts$: Observable<Workout[]> | Observable<any[]> = this.db
+    .list(`workouts/${this.uid}`)
     .snapshotChanges()
     .pipe(
       tap((next) => {
         console.log('next', next);
-        this.store.set('meals', next);
+        this.store.set('workouts', next);
       })
     );
 
@@ -38,25 +40,29 @@ export class MealsService {
     return this.authService.user?.uid;
   }
 
-  getMeal(key: string) {
+  getWorkout(key: string) {
     if (!key) return of({});
     return this.store
-      .select<Meal[]>('meals')
+      .select<Workout[]>('workouts')
       .pipe(filter(Boolean))
-      .pipe(map((meals: any[]) => meals.find((meal: any) => meal.key === key)));
+      .pipe(
+        map((workouts: any[]) =>
+          workouts.find((workout: any) => workout.key === key)
+        )
+      );
   }
 
-  addMeal(meal: any) {
-    return this.db.list(`meals/${this.uid}`).push(meal);
+  addWorkout(workout: any) {
+    return this.db.list(`workouts/${this.uid}`).push(workout);
   }
 
-  updateMeal(key: string, meal: Meal) {
-    return this.db.object(`meals/${this.uid}/${key}`).update(meal);
+  updateWorkout(key: string, workout: Workout) {
+    return this.db.object(`workouts/${this.uid}/${key}`).update(workout);
   }
 
-  removeMeal(payload: any) {
+  removeWorkout(payload: any) {
     //passed this way because we are using snapshotChanges()
     //and as meal we return the payload that has the key inside and the other info
-    return this.db.list(`meals/${this.uid}`).remove(payload.key);
+    return this.db.list(`workouts/${this.uid}`).remove(payload.key);
   }
 }
